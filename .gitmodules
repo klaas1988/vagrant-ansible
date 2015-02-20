@@ -1,3 +1,6 @@
 [submodule "ansible/roles/bennojoy.nginx"]
 	path = ansible/roles/bennojoy.nginx
 	url = https://github.com/bennojoy/nginx.git
+[submodule "ansible/roles/nodesource.node"]
+	path = ansible/roles/nodesource.node
+	url = https://github.com/nodesource/ansible-nodejs-role.git
