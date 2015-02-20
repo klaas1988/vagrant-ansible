@@ -3,16 +3,15 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "withinboredom/Trusty64"
 
-  config.vm.provider :virtualbox do |v|
-    config.vm.network "private_network", ip: "192.168.13.37"
-    config.vm.hostname = "appdev"
-  end
+  config.vm.network "private_network", ip: "192.168.13.37"
+    config.vm.provider :virtualbox do |v|
+      config.vm.hostname = "appdev"
+    end
 
-  config.vm.provider :hyperv do |v|
-    config.vm.network :private_network, ip: "192.168.56.102"
+    config.vm.provider :hyperv do |v|
       config.vm.network :forwarded_port, guest: 80, host: 2201
       config.ssh.forward_agent = true
-  end
+    end
 
   #Add any alias:
   config.hostsupdater.aliases = [
