@@ -19,7 +19,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     "phpmyadmin.app.dev"
   ]
 
-  config.vm.synced_folder ".", "/vagrant", :nfs => true
+  nfs_setting = RUBY_PLATFORM =~ /darwin/ || RUBY_PLATFORM =~ /linux/
+  config.vm.synced_folder ".", "/vagrant", :nfs => nfs_setting
 
   #Fix for Ansible bug resulting in an encoding error
   ENV['PYTHONIOENCODING'] = "utf-8"
