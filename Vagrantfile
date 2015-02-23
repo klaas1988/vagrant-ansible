@@ -3,12 +3,15 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
 
+  ansible_type = "ansible"
+
   config.vm.network "private_network", ip: "192.168.13.37"
     config.vm.provider :virtualbox do |v|
       config.vm.hostname = "appdev"
     end
 
     config.vm.provider :hyperv do |v|
+      ansible_type = "ansible_local"
       config.vm.network :forwarded_port, guest: 80, host: 2201
       config.ssh.forward_agent = true
     end
@@ -25,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #Fix for Ansible bug resulting in an encoding error
   ENV['PYTHONIOENCODING'] = "utf-8"
 
-  config.vm.provision "ansible_local" do |ansible|
+  config.vm.provision ansible_type do |ansible|
     ansible.limit = 'all'
     ansible.playbook = "ansible/development.yml"
     ansible.inventory_path = "ansible/hosts"
