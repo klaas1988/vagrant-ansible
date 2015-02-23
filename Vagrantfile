@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #Fix for Ansible bug resulting in an encoding error
   ENV['PYTHONIOENCODING'] = "utf-8"
 
-  config.vm.provision "ansible" do |ansible|
+  config.vm.provision "ansible_local" do |ansible|
     ansible.limit = 'all'
     ansible.playbook = "ansible/development.yml"
     ansible.inventory_path = "ansible/hosts"
