@@ -5,14 +5,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   ansible_type = "ansible"
 
-  config.vm.network "private_network", ip: "192.168.13.37"
+  config.vm.network "private_network", ip: "192.168.56.102"
     config.vm.provider :virtualbox do |v|
       config.vm.hostname = "appdev"
     end
 
     config.vm.provider :hyperv do |v|
       ansible_type = "ansible_local"
-      config.vm.network :forwarded_port, guest: 80, host: 2201
+      config.vm.network :forwarded_port, guest: 80, host: 2202
       config.ssh.forward_agent = true
     end
 
